@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="/action" method="POST">
+	<div class="ui segment blue inverted">
+		<h1>MDH metadata Dashboard</h1>
+		<div class="meta"><i>Logged in as {{session.username}}</i></div>
+		<div class="description">
+			Entry data screen for Metadata (Vendors) entered in the metadata DB.
+		</div><br>
+		<button class="ui button green" type="submit" name="create" value="create"> Create </button>
+		<a href="/" class="ui button grey">Cancel</a>
+	</div>
+
+	<h3>Adding New Vendor</h3>
+  <div class="ui label" >Unique Object ID : <i>not assigned yet</i></div>
+	<div class="ui segment grey inverted tertiary">
+	<div class="ui form">
+	<!--VENDOR INFO-->
+	<h4 class="ui dividing header large">Vendor Information</h4>
+	<div class="field">
+		<div class="fields">
+			<div class="eight wide field required">Vendor Name <input type="text" name="name" placeholder="Vendor name" required/></div>
+			<div class="four wide field required">Vendor Code <input type="text" name="code" placeholder="Vendor Code" required/></div>
+		</div>
+		<div class="field">Description<textarea rows="2" name="desc" placeholder="Vendor description" required></textarea></div>
+	</div>
+
+	<!--VENDOR CONTACT-->
+	<h4 class="ui dividing header large">Vendor Contact Details</h4>
+	<div class="field">
+			<label>Contact Person</label>
+			<div class="fields">
+				<div class="six wide field"><input type="text" name="contactname" placeholder="Contact Name"></div>
+				<div class="six wide field"><input type="text" name="contactemail" placeholder="Contact Email"></div>
+				<div class="six wide field"><input type="text" name="contactweb" placeholder="Web address"></div>
+			</div>
+	</div>
+	<div class="field">
+			<label>Contact Address</label>
+			<div class="fields">
+				<div class="twelve wide field"><input type="text" name="contacta1" placeholder="Street Address"></div>
+				<div class="four wide field"><input type="text" name="contacta2" placeholder="Apt #"></div>
+			</div>
+	</div>
+	<div class="two fields">
+			<div class="field">
+				<label>State</label>
+				<select class="ui fluid dropdown" id="state">
+					<option value="">State</option>
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+				</select>
+			</div>
+			<div class="field">
+				<label>Country</label>
+					<select class="ui fluid dropdown searchable" id="country">
+						<option value="">Country</option>
+						<option value="AL">Alabama</option>
+						<option value="AK">Alaska</option>
+						<option value="AK">eur</option>
+					</select>
+				</div>
+			</div>
+
+
+	</div>
+	</div>
+
+	<!-- <table class="ui table basic striped">
+		<tr>
+			<td><b><big><label>Add a new vendor : </label></big></b></td>
+		</tr>
+		<tr>
+		<td><input type="text" name="name" placeholder="Vendor name" required/></td>
+		<td><input type="text" name="code" placeholder="Vendor Code" required/></td>
+		<td><textarea name="desc" rows="1" cols="30" placeholder="Enter Description here..." required></textarea></td>
+		<td><input type="text" name="date" placeholder="Date" /></td>
+		<td><input type="text" name="pr" placeholder="Priority" /></td>
+		<td></td>
+		</tr>
+	</form>
+	</table> -->
+{% endblock %}

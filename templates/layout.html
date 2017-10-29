@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MDH Metadata FlaskApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css">
+  </head>
+
+  <body>
+      {% include 'includes/_navbar.html' %}
+      <div class="ui container pusher">
+        <div class="ui segment">
+        {% block body %}{% endblock %}
+        </div>
+      </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.7.1/ckeditor.js"></script>
+    <script type="text/javascript">
+      CKEDITOR.replace('msgtext')
+      CKEDITOR.replace('infomsgtext')
+    </script>
+
+    <script type="text/javascript">
+    $('#submitButton').on('click', function(){
+      $('.ui.form').form('validate form');
+    });
+
+    // Change the form layout depending on selection
+
+    $('#msgtemp').change(function() {
+      if(document.getElementById('msgtemp').value == "welcome") {
+        $('#welcome').attr('class', 'ui visable blue inverted message');
+        $('#anno,#info,#sys,#basic,#advanced').attr('class', 'ui hidden blue inverted message');
+      }
+      if(document.getElementById('msgtemp').value == "anno") {
+        $('#anno').attr('class', 'ui visable blue inverted message');
+        $('#welcome,#info,#sys,#basic,#advanced').attr('class', 'ui hidden blue inverted message');
+      }
+      if(document.getElementById('msgtemp').value == "info") {
+        $('#info').attr('class', 'ui visable blue inverted message');
+        $('#anno,#welcome,#sys,#basic,#advanced').attr('class', 'ui hidden blue inverted message');
+      }
+      if(document.getElementById('msgtemp').value == "sys") {
+        $('#sys').attr('class', 'ui visable blue inverted message');
+        $('#anno,#info,#welcome,#basic,#advanced').attr('class', 'ui hidden blue inverted message');
+      }
+      if(document.getElementById('msgtemp').value == "basic") {
+        $('#basic').attr('class', 'ui visable blue inverted message');
+        $('#anno,#info,#welcome,#sys,#advanced').attr('class', 'ui hidden blue inverted message');
+      }
+      if(document.getElementById('msgtemp').value == "advanced") {
+        $('#advanced').attr('class', 'ui visable blue inverted message');
+        $('#anno,#info,#welcome,#sys,#basic').attr('class', 'ui hidden blue inverted message');
+      }
+    });
+
+    $('select.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+    $('.ui.radio.checkbox').checkbox();
+
+    $('.ui.form')
+      .form({
+        fields: {
+          sendto: 'minCount[1]'
+              },
+    onSuccess: function(event, fields){
+        $('#mailresult').html("<br><div class='ui green message'><i class='close icon'></i>Email sent</div>");
+        console.log("on success");
+        console.log(fields);
+        // event.preventDefault();
+    },
+    onFailure: function(formErrors, fields){
+        $('#mailresult').html("<br><div class='ui red message'><i class='close icon'></i>Error! no mail sent</div>");
+        console.log("on failure");
+        console.log(fields);
+    }
+    });
+
+    </script>
+    </body>
+</html>

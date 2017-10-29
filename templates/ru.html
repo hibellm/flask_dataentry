@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="ui form">
+    <form action="/mail">
+
+      <div class="field">
+        <h1>Read & understand documents.</h1>
+        <div class="ui field six wide">
+          <label>Select the Read & Understood you want access to</label>
+          <select class="ui fluid dropdown" id="msgtemp" name="msgtemp" placeholder="Select a template">
+            <option value="cprd">CPRD</option>
+            <option value="truven">Truven</option>
+            <option value="premier">Premier</option>
+            <option value="seer">SEER-Medicare</option>
+            <option value="info">Info</option>
+            <option value="sys">System Maintainence</option>
+          </select>
+        </div>
+      </div>
+    <!-- R&U documents -->
+    <!--ANNOUNCEMENT-->
+    <div class="ui message visable" id="cprd">
+      <div class="inline fields">
+        <div class="ui message blue inverted">
+            <div class="field">
+              <label>CPRD</label>
+              <iframe src="https://drive.google.com/file/d/0Bw5Gl2xGNvNzQTZoNU1DUUtnbm8/preview?usp=embed_googleplus" width="640" height="700" allowfullscreen></iframe>
+            </div>
+        </div>
+
+      </div>
+      <div class="field">
+        <div class="ui checkbox"><input type="checkbox" tabindex="0" class="hidden" value="RUok"><label>I have Read & understood</label></div>
+      </div>
+    </div>
+
+    <div class="ui message hidden" id="anno">
+      <div class="inline fields">
+        <label for="sysserver">Which system</label>
+        <div class="inline field">
+        </div>
+      </div>
+    </div>
+
+      <br>
+      <button class="ui button green compact " id="submitButton" type="submit"><i class="send icon"></i>Submit Request</button>
+      <button class="ui button red compact " id="submitButton" type="submit"><i class="send icon"></i>Cancel Request</button>
+    </form>
+</div>
+<!--INFO ABOUT RESULT OF SUBMIT GOES HERE-->
+<div id="mailresult"></div>
+
+
+{% endblock %}

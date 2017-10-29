@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="ui form">
+    <form action="/mail">
+      <div class="field">
+        <label>Message Type</label>
+        <select class="ui fluid dropdown" id="msgtemp" name="msgtemp" placeholder="Select a template">
+          <option value="welcome">Welcome</option>
+          <option value="basic">Basic Training</option>
+          <option value="advanced">Advanced Training</option>
+          <option value="anno">Announcement</option>
+          <option value="info">Info</option>
+          <option value="sys">System Maintainence</option>
+        </select>
+      </div>
+      <div class="ten wide field">
+        <label>To:</label>
+        <input type="text" id="sendto" placeholder="john.doe@roche.com, jane.doe@roche.com, etc..." name="sendto">
+      </div>
+
+    <!-- test of hiding section -->
+    <div class="ui message blue inverted visable" id="welcome">
+        <div class="field">
+          <label>this works</label>
+          <textarea rows="2" id="msgtext" name="msgtext"></textarea>
+        </div>
+    </div>
+    <!--ANNOUNCEMENT-->
+    <div class="ui message hidden" id="anno">
+      <div class="inline fields">
+        <label for="sysserver">Which system</label>
+        <div class="inline field">
+          <div class="ui checkbox"><input type="checkbox" tabindex="0" class="hidden" value="EU Teradata"><label>EU Terdata</label></div>
+          <div class="ui checkbox"><input type="checkbox" tabindex="1" class="hidden" value="US Teradata"><label>US Terdata</label></div>
+          <div class="ui checkbox"><input type="checkbox" tabindex="2" class="hidden" value="BEE server"><label>BEE Server</label></div>
+        </div>
+      </div>
+    </div>
+    <!--INFO MAIL  -->
+    <div class="ui message hidden" id="info">
+      <div class="ten wide field">
+        <label>Title</label>
+        <input type="text" id="infotitle" placeholder="Title of the mail" name="infotitle">
+      </div>
+      <div class="field">
+        <label>The message to send</label>
+        <textarea rows="2" id="infomsgtext" name="infomsgtext"></textarea>
+      </div>
+    </div>
+    <!-- SYSTEM MAINTAINENCE -->
+    <div class="ui message hidden" id="sys">
+      <!-- <div class="inline fields" > -->
+        <label for="whichsys">Which system</label>
+        <div class="inline field" id="sysserver">
+          <div class="ui checkbox"><input type="checkbox" tabindex="0" class="hidden" value="EU Teradata server"><label>EU Teradata</label></div>
+          <div class="ui checkbox"><input type="checkbox" tabindex="1" class="hidden" value="EU Teradata server"><label>US Teradata</label></div>
+        </div>
+      <!-- </div> -->
+      <div class="six wide field">
+        <label>Title</label>
+        <textarea rows="1" id="systitle" name="systitle"></textarea>
+      </div>
+      <div class="six wide field">
+        <label>When?</label>
+        <textarea rows="1" id="sysdate" name="sysdate"></textarea>
+      </div>
+      <div class="field">
+        <label>The message to send</label>
+        <textarea rows="2" id="sysmsgtext" name="sysmsgtext"></textarea>
+      </div>
+    </div>
+    <!-- BASIC TRAINING -->
+    <div class="ui message hidden" id="basic">
+      <div class="six wide field">
+        <label>When?</label>
+        <textarea rows="1" id="basicdate" name="basicdate"></textarea>
+      </div>
+      <div class="six wide field">
+        <label>Where?</label>
+        <textarea rows="1" id="basiclocation" name="basiclocation"></textarea>
+      </div>
+    </div>
+    <!-- ADVANCED TRAINING -->
+    <div class="ui message hidden" id="advanced">
+      <div class="six wide field">
+        <label>When?</label>
+        <textarea rows="1" id="advanceddate" name="advanceddate"></textarea>
+      </div>
+      <div class="six wide field">
+        <label>Where?</label>
+        <textarea rows="1" id="advancedlocation" name="advancedlocation"></textarea>
+      </div>
+    </div>
+      <br>
+      <button class="ui button green compact " id="submitButton" type="submit"><i class="send icon"></i>Send Mail</button>
+    </form>
+</div>
+<!--INFO ABOUT RESULT OF SUBMIT GOES HERE-->
+<div id="mailresult"></div>
+
+{% endblock %}

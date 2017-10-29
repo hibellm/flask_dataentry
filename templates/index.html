@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="ui segment blue inverted">
+    <h1>MDH metadata Dashboard</h1>
+    <div class="meta"><i>Logged in as {{session.username}}</i></div>
+    <div class="description">
+      A list of Metadata (Vendors and Data sources) entered in the metadata DB.
+  		<p>Add a new entry, edit an existing entry or delete one.</p>
+    </div><br>
+ <!-- href="/list"
+    <div class="ui button green compact" href="/add"> Add New Vendor </button> -->
+    <div class="ui form">
+      <form action="/action2">
+        <button class="ui button green compact" type="submit"> Add New Vendor </button>
+      </form>
+    </div>
+    {% include 'includes/_messages.html' %}
+</div>
+
+	{% if vendors[0] %}
+	<div span="right">
+	<form action="/search"	method="GET" >
+
+	<div class="ui segment">
+  	<div class="ui category search">
+  	  <div class="ui icon input">
+  	      <input class="prompt" type="text" placeholder="Search Vendors...">
+  	      <i class="search icon"></i>
+  	  </div>
+  	  <div class="results"></div>
+  	</div>
+	</div>
+		<table class="ui table basic striped sortable" id="close">
+		<tr>
+		<td></td><td></td>
+		<td><big><b>Search Reference:</b></big></td>
+		<td><select name="refer" required>
+			<option value="name">Vendor Name</option>
+			<option value="desc">Description</option>
+			<option value="date">Date Entered</option>
+			<option value="pr">Created by</option>
+		</select></td>
+		<td><input type="text" name="key" placeholder="Search Task" size="15" /></td>
+		<td><button type="submit">Search</button></td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+	<h1 class="ui header">List of Vendors</h1>
+	<table class="ui table baisc striped sortable" id="vendorlist">
+	    <tr id="row">
+	    	<th class="status"></th>
+        <th class="name ascending">Vendor Name</th>
+        <th class="code">Vendor Code</th>
+	    	<th class="desc">Description</th>
+	    	<th class="date">Date Entered</th>
+	    	<th class="pr">Creator</th>
+    		<th class="func1">Remove</th>
+    		<th class="func2">Modify</th>
+	    </tr>
+	{% for vendor in vendors %}
+		<tr class="datas">
+			<td><a href="./update?_id={{ vendor['_id'] }}"><i class="ui icon external"></i></a></td>
+			<td class="name">{{ vendor["name"] }}</td>
+			<td class="code">{{ vendor["code"] }}</td>
+      <td class="desc">{{ vendor["desc"] }}</td>
+			<td class="date">{{ vendor["date"] }}</td>
+			<td class="pr">{{ vendor["pr"] }}</td>
+			<td class="func1">
+				<a href="./remove?_id={{ vendor['_id'] }}"><input class="ui button red" type="submit" value="Delete">
+				</a>
+			</td>
+			<td class="func1">
+				<a href="./update?_id={{ vendor['_id'] }}"><input class="ui button green" type="submit" value="Edit">
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% else %}
+    <div class="ui segment inverted red"><h3>No vendors in the List !!</h3></div>
+	{% endif %}
+
+{% endblock %}

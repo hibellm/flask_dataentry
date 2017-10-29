@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="ui segment blue inverted">
+	<h1>MDH metadata Dashboard</h1>
+	<div class="meta"><i>Logged in as {{session.username}}</i></div>
+	<div class="description">
+		A list of Metadata (Vendors and Data sources) entered in the metadata DB.
+		Add a new entry, edit an existing entry or delete one.
+	</div><br>
+</div>
+
+	<h3>Update Vendor Details</h3>
+	<form action="/action3" method="POST">
+	{% for task in tasks %}
+	<!-- <div class="ui label" >Unique Object ID : {{ task['_id'] }}</div> -->
+	<div class="ui label" >Unique Object ID : not assigned yet</div>
+	<div class="ui segment grey inverted tertiary">
+		<input type="text" name="_id" value="{{ task['_id'] }}" hidden>
+	<div class="ui form">
+
+		<!--VENDOR INFO-->
+		<h4 class="ui dividing header large">Vendor Information</h4>
+		<div class="field">
+			<div class="fields">
+				<div class="eight wide field required">Vendor Name <input type="text" id="VendorName" name="VendorName" value="{{ task['name'] }}" placeholder="Vendor Name"></div>
+				<div class="four wide field required">Vendor Code <input type="text" id="VendorCode" name="VendorCode" value="{{ task['code'] }}" placeholder="Vendor Code"></div>
+			</div>
+			<div class="field">Description<textarea rows="2" value="" name="desc" value="{{ task['desc'] }}" placeholder="Vendor description">{{ task['desc'] }}</textarea></div>
+		</div>
+		<!--VENDOR CONTACT-->
+		<h4 class="ui dividing header large">Vendor Contact Details</h4>
+		<div class="field">
+		    <label>Contact Person</label>
+		    <div class="fields">
+		      <div class="six wide field"><input type="text" name="Contact[detail]" placeholder="Contact Name"></div>
+					<div class="six wide field"><input type="text" name="Contact[detail-2]" placeholder="Contact Email"></div>
+					<div class="six wide field"><input type="text" name="Contact[detail-3]" placeholder="Web address"></div>
+		    </div>
+		</div>
+		<div class="field">
+		    <label>Contact Address</label>
+		    <div class="fields">
+		      <div class="twelve wide field"><input type="text" name="Contact[address]" placeholder="Street Address"></div>
+		      <div class="four wide field"><input type="text" name="Contact[address-2]" placeholder="Apt #"></div>
+		    </div>
+		</div>
+		<div class="two fields">
+		    <div class="field">
+		      <label>State</label>
+		      <select class="ui fluid dropdown" id="state">
+		        <option value="">State</option>
+				    <option value="AL">Alabama</option>
+				    <option value="AK">Alaska</option>
+		      </select>
+		    </div>
+		    <div class="field">
+		      <label>Country</label>
+						<select class="ui fluid dropdown searchable" id="country">
+							<option value="">Country</option>
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AK">eur</option>
+						</select>
+		      </div>
+		    </div>
+		<p>
+		<input class="ui button green" type="submit" value="Update">
+	</div><!--END OF UI FORM -->
+
+		<a href="/"><input class="ui button yellow" type="submit" value="Cancel"></a>
+			                                                                                                                            </div>
+		</div><!--END OF SEGMENT-->
+	</form>
+
+
+	{% endfor %}
+
+	<!--FORM VALIDATION  -->
+	<script>
+		$('select.dropdown')
+		  .dropdown()
+		;
+		$('.ui.form')
+			.form({
+				fields: {
+					VendorName   : 'empty',
+					VendorCode   : ['maxLength[6]', 'empty'],
+					country      : 'empty',
+					state        : 'empty'
+				}
+			})
+		;
+	</script>
+
+  {% endblock %}
